@@ -5,18 +5,15 @@
 #include <ctime>
 using namespace std;
 
-//upoad to github
-//figure out errors and loopholes
-//comment
-//test
+//Don't understand the difference between  "user application function" and "user application progarm" in the question
+//I added some extra features such as displaying the centers and displaying the distance between each point and center to make the program more friendly and understandable
 
-//can I do a class for clusters?
-//what does "user application function" and "user application progarm" mean?
-//is it alright if I use double instead of float
+
+//Prototypes
 
 void positive(int&);
 
-void generateCluster(point*&, int, double, double);
+void generateCluster(point*&, int, float, float);
 
 void generatePoints(point*&, int);
 
@@ -28,16 +25,16 @@ void deleteArray(point*&);
 
 
 
-int main()
+int main() //main to run program
 {
 	point *A, *B, *p; int nA, nB, m;
 
-	cout << "Please input size of cluster A: "; cin >> nA; positive(nA); generateCluster(A, nA, 70.0, 70.0);
+	cout << "Please input size of cluster A: "; cin >> nA; positive(nA); generateCluster(A, nA, 70.0, 70.0); //instead of presetting it I gave the user the option to decide how many points
 	cout << "Please input size of cluster B: "; cin >> nB; positive(nB); generateCluster(B, nB, 20.0, 20.0);
 	cout << "Please input number of random points to be generated: "; cin >> m; positive(m); generatePoints(p,m);
 
-	cout << "\nCluster A center: "; Center(A, nA).display(); cout << "  Cluster B center: ";Center(B, nB).display(); cout << "\n\n";
-	for (int i = 0;i < m;i++)
+	cout << "\nCluster A center: "; Center(A, nA).display(); cout << "  Cluster B center: ";Center(B, nB).display(); cout << "\n\n"; //This is just to display the centers 
+	for (int i = 0;i < m;i++) 
 	{
 		cout<<"Point "<<i+1<<":"; whichCluster(A, nA, B, nB, *(p + i));
 		cout << "\n\n";
@@ -50,7 +47,7 @@ int main()
 	return 0;
 }
 
-void positive(int& n)
+void positive(int& n) //rejects non-positive number of points
 {
 	while (n <= 0)
 	{
@@ -58,20 +55,20 @@ void positive(int& n)
 	}
 }
 
-void generateCluster(point*& cluster, int n, double xMin, double yMin)
+void generateCluster(point*& cluster, int n, float xMin, float yMin) //generates a cluster of n points
 {
 	cluster = new point[n];
 	srand((unsigned int)time(NULL));
 	for (int i = 0; i < n;i++)
 	{
-		(cluster + i)->setX(rand() % 21 + xMin); //how do I generate rand double? //how to use (xRange != 0 ? xRange : 20) here
+		(cluster + i)->setX(rand() % 21 + xMin); //Note to self: how to use (xRange != 0 ? xRange : 20) here?
 		(cluster + i)->setY(rand() % 21 + yMin); //e.g. current range is 70<=x<=90 for how to limit range to 70.0<y<90.0
 	}
 }
 
-point Center(point* C, int n)
+point Center(point* C, int n )//finds center and returns it as a point
 {
-	point center; double sumX = 0, sumY = 0;
+	point center; float sumX = 0, sumY = 0;
 
 	for (int i = 0;i < n;i++)
 	{
@@ -84,23 +81,23 @@ point Center(point* C, int n)
 	return center;
 }
 
-void whichCluster(point* A, int nA, point* B, int nB, point p) //is cout what is needed or?
+void whichCluster(point* A, int nA, point* B, int nB, point p) //outputs which cluster p belongs to
 {
-	p.display(); cout << endl;//remove before submitting
+	p.display(); cout << endl; 
 	cout << "distance to A: " << p.distancebtw(Center(A, nA)); cout << " distance to B: " << p.distancebtw(Center(B, nB))<<endl;
 	if (p.distancebtw(Center(A, nA)) > p.distancebtw(Center(B, nB))) cout << "Point belongs to cluster B\n";
 	else if (p.distancebtw(Center(A, nA)) < p.distancebtw(Center(B, nB))) cout << "Point belongs to cluster A\n";
 	else cout << "Point is equidisant from clusters A and B\n";
 }
 
-void generatePoints(point*& p, int m)
+void generatePoints(point*& p, int m) //generates m points
 {
-	p = new point[m]; //is it alright to do it in the form of an array or do I use which cluster on one variable point that I change in the loop
+	p = new point[m]; //note to self: is it alright to do it in the form of an array or do I use which cluster on one variable point that I change in the loop?
 	srand((unsigned int)time(NULL));
 	for (int i = 0;i < m;i++)
 	{
-		(p + i)->setX(double(rand() % 96 + 5));
-		(p + i)->setY(double(rand() % 96 + 5));
+		(p + i)->setX(float(rand() % 96 + 5));
+		(p + i)->setY(float(rand() % 96 + 5));
 	}
 }
 

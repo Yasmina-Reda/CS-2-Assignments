@@ -3,43 +3,43 @@
 #include <cmath>
 using namespace std;
 
-point::point()
+point::point() //default constructor
 {
 	x = 0;y = 0;
 }
 
-point::point(double x, double y)
+point::point(float x, float y) //argument constructor
 {
 	this->x = x; this->y = y;
 }
 
-void point::setX(double x)
+void point::setX(float x)
 {
 	this->x = x;
 }
 
-void point::setY(double y)
+void point::setY(float y)
 {
 	this->y = y;
 }
 
-double point::getX()
+float point::getX()
 {
 	return x;
 }
 
-double point::getY()
+float point::getY()
 {
 	return y;
 }
 
-void point::display()
+void point::display() //displays the point
 {
 	cout << '(' << x << "," << y << ')'; 
 }
 
-double point::distancebtw(point p)
+float point::distancebtw(point p) //computes distance
 {
 
-	return double(sqrt(pow(x - p.x, 2) + pow(y - p.y, 2)));
+	return float(sqrt(pow(x - p.x, 2) + pow(y - p.y, 2)));
 }

@@ -3,17 +3,17 @@
 
 class point {
 private:
-	double x, y;
+	float x, y;
 public:
 	point();
-	point(double, double); 
+	point(float, float); 
 	~point() {};
-	void setX(double);
-	void setY(double);
-	double getX();
-	double getY();
+	void setX(float);
+	void setY(float);
+	float getX();
+	float getY();
 	void display();
-	double distancebtw(point);
+	float distancebtw(point);
 };
 #endif
 
